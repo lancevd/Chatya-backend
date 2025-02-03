@@ -1,3 +1,4 @@
+import { get } from "mongoose";
 import { generateToken } from "../lib/utils.js";
 import User from "../models/user.js";
 import bcrypt from "bcryptjs";
@@ -77,6 +78,8 @@ export const login = async (req, res) => {
         message: "Invalid credentials.",
       });
     }
+
+    generateToken(user._id, res);
 
     return res.status(200).json({
       ...user._doc,
