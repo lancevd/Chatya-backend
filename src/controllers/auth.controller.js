@@ -111,5 +111,26 @@ export const logout = (req, res) => {
 };
 
 export const updateProfile = async (req, res) => {
-  
+  try {
+    const {profilePic} = req.body;
+    const userId = req.user._id;
+
+    if (!profilePic) {
+      return res.status(400).json({
+        message: "Please upload a profile picture.",
+      });
+    }
+
+    const uploadResponse = await cloudinary.uploader.upload(profilePic);
+    const updatedUser = await User.findByIdAndUpdate(userId, {
+      profilePic: uploadResponse.secure_url,
+    });
+
+    return res.status(200).json({
+      ...updatedUser._doc,
+      password: undefined,
+    });
+  } catch (error) {
+    
+  }
 }
