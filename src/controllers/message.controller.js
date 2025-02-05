@@ -29,3 +29,30 @@ export const getMessages = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const sendMessage = async (req, res) => {
+  try {
+    const { text, image } = req.body;
+    const { id: receiverId } = req.params;
+    const senderId = req.user._id;
+
+    let imageUrl;
+
+    if (image) {
+      const uploadResponse = await cloudinary.uploader.upload(image);
+      imageUrl = uploadResponse.secure_url;
+    }
+
+    const newMessage = new Message({
+      text,
+      image: imageUrl,
+      senderId,
+      receiverId,
+    });
+
+    await newMessage.save();
+  } catch (error) {
+    console.log("Internal server error", error);
+    res.status(500).json({ message: error.message });
+  }
+};
