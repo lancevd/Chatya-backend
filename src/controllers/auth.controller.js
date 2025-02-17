@@ -130,7 +130,12 @@ export const updateProfile = async (req, res) => {
       ...updatedUser._doc,
       password: undefined,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log("Update profile controller error", error);
+    return res.status(500).json({
+      message: `Server error: ${error}`,
+    });
+  }
 };
 
 export const checkAuth = (req, res) => {
