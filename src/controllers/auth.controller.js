@@ -1,5 +1,6 @@
 import { get } from "mongoose";
 import { generateToken } from "../lib/utils.js";
+import cloudinary from "../lib/cloudinary.js";
 import User from "../models/user.js";
 import bcrypt from "bcryptjs";
 
