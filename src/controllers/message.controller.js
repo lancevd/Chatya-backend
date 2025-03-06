@@ -53,7 +53,7 @@ export const sendMessage = async (req, res) => {
 
     await newMessage.save();
   } catch (error) {
-    console.log("Internal server error", error);
+    console.log("Internal server error", error.message);
     res.status(500).json({ message: error.message });
   }
 };
