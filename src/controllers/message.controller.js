@@ -38,7 +38,7 @@ export const sendMessage = async (req, res) => {
     const { text, image } = req.body;
     const { id: receiverId } = req.params;
     const senderId = req.user._id;
-
+    console.log(text)
     let imageUrl;
 
     if (image) {
@@ -47,13 +47,15 @@ export const sendMessage = async (req, res) => {
     }
 
     const newMessage = new Message({
-      text,
-      image: imageUrl,
       senderId,
       receiverId,
+      message:text,
+      image: imageUrl,
     });
 
     await newMessage.save();
+
+    res.status(201).json(newMessage);
   } catch (error) {
     console.log("Internal server error", error.message);
     res.status(500).json({ message: error.message });
