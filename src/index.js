@@ -9,7 +9,7 @@ import { connectDB } from "./lib/db.js";
 import { app, server } from "./lib/socket.js";
 
 dotenv.config();
-app.use(express.json()); 
+app.use(express.json());
 
 const PORT = process.env.PORT || 5001;
 app.use(express.json());
