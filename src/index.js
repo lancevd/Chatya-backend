@@ -16,6 +16,11 @@ const allowedOrigins = ["https://chatya.vercel.app", "http://localhost:3000"];
 const PORT = process.env.PORT || 5001;
 app.use(express.json());
 app.use(cookieParser());
+app.use((req, res, next) => {
+  console.log("Request origin:", req.headers.origin);
+  next();
+});
+
 app.use(
   cors({
     origin: function (origin, callback) {
