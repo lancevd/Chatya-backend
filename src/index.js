@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://chatya-backend.vercel.app",
+    origin: "https://chatya.vercel.app" || "http://localhost:3000",
     credentials: true,
   })
 );
