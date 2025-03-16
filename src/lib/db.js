@@ -15,8 +15,8 @@ export const connectDB = async () => {
   try {
     console.log("🔗 Connecting to MongoDB...");
     console.log(
-      "🔍 MONGODB_URI starts with:",
-      process.env.MONGODB_URI?.slice(0, 20) || "NOT SET"
+      "🔍 MONGODB_URI starts is:",
+      process.env.MONGODB_URI || "NOT SET"
     );
 
     const conn = await mongoose.connect(process.env.MONGODB_URI, {
