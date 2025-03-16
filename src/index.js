@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth.js";
 import messageRoutes from "./routes/message.js";
 import { connectDB } from "./lib/db.js";
 import { app, server } from "./lib/socket.js";
+import mongoose from "mongoose";
 
 dotenv.config();
 
@@ -38,6 +39,19 @@ app.use(
     credentials: true,
   })
 );
+
+app.get("/test-db", async (req, res) => {
+  try {
+    console.log("📡 Testing DB connection...");
+    await mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000,
+    });
+    res.json({ success: true, message: "Connected to MongoDB!" });
+  } catch (error) {
+    res.json({ success: false, error: error.message });
+  }
+});
+
 
 console.log("🔗 Connecting to MongoDB...");
 connectDB()
