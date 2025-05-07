@@ -5,9 +5,16 @@ import express from "express";
 const app = express();
 const server = http.createServer(app);
 
+const allowedOrigins = [
+  "https://chatya.vercel.app",
+  "http://localhost:3000",
+  "https://chatya-backend.onrender.com"
+];
+
 const io = new Server(server, {
   cors: {
-    origin: "https://chatya.vercel.app" || "http://localhost:3000",
+    origin: allowedOrigins,
+    credentials: true,
   },
 });
 

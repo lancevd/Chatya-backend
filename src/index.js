@@ -11,7 +11,11 @@ import { app, server } from "./lib/socket.js";
 dotenv.config();
 app.use(express.json());
 
-const allowedOrigins = ["https://chatya.vercel.app", "http://localhost:3000"];
+const allowedOrigins = [
+  "https://chatya.vercel.app",
+  "http://localhost:3000",
+  "https://chatya-backend.onrender.com"
+];
 
 const PORT = process.env.PORT || 5001;
 app.use(express.json());
